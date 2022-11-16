@@ -48,12 +48,32 @@ enum Vehicle {
     
     // 1: Create computed value here
     
+    var description: String {
+        switch self {
+        case .airplane:
+            return "This is an airplane"
+        case .boat:
+            return "This is a boat"
+        case let .truck(isFourWheel):
+            if isFourWheel == true {
+                return "This is a truck with four wheel drive "
+            } else {
+                return "This is a truck"
+            }
+        
+            
+        }
+    
+    }
+    
 }
  
 // 2: Instantiate myRide constant here
- 
+var myRide = Vehicle.truck(isFourWheelDrive: true)
 
 // 3: Print the description of myRide here
+
+print(myRide.description)
 
 
 

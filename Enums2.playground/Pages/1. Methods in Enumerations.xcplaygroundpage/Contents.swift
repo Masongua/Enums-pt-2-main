@@ -35,26 +35,28 @@ print(currentSeason)
 /*: ### Instructions
 1. Create an instance method called goOffRoad inside of the Vehicle enumeration that mutates itself into a truck. The isFourWheelDrive associated value should be set to true.
 */
-
+enum Vehicle {
+    case truck(isFourWheelDrive: Bool)
+    case airplane
+    case boat
+    
+    mutating func goOffRoad() {
+        self = .truck(isFourWheelDrive: true)
+    }
+    
+}
 /*:
  2.Call the goOffRoad() method on the myRide instance.
 
 */
+var myRide = Vehicle.truck(isFourWheelDrive: false)
+myRide.goOffRoad()
+print(myRide)
 
 /*: 3.Print the contents of the myRide variable.
 
 */
 
-enum Vehicle {
-    case truck(isFourWheelDrive: Bool)
-    case boat
-    case airplane
-    
-    // 1: Create mutating instance method here
-
-}
-
-var myRide = Vehicle.airplane
 
 // 2: Call Method here
 

@@ -12,13 +12,29 @@
  Ready to code? Let’s get into it!
 */
 
+
+
 /*: ### Tasks
  1.  Let’s create an enumeration that will hold the different types of software products we will offer for sale. Define an enumeration called ProductType and have it store raw values of type String.
  2. Now let’s add some cases with the following names and values: aceRepository : “Ace Repository”, dealForcer : “Deal Forcer”, kadencePlanner : “Kadence Planner”, mailCannon : “Mail Cannon”
  3. We’re going to want to iterate across this enumeration so let’s make it conform to the right protocol to enable this.
  4. We want a method that prints all available product types. Define a method called displayProductOfferings(). When called it should print "There are {number of products} products": then print all product cases defined in ProductType.
 */
-
+enum ProductType: String {
+    case aceRepository = "Ace Repository"
+    case dealForcer = "Deal Forcer"
+    case KadencePlanner = "Kadence Planner"
+    case mailCannon = "Mail Cannon"
+    
+    
+    mutating func displayProductOfferings() {
+        print("There are 4 products")
+        print(self = .aceRepository)
+        print(self = .dealForcer)
+        print(self = .KadencePlanner)
+        print(self = .mailCannon)
+    }
+}
 
 
 
@@ -28,7 +44,22 @@
  6. We want to define three cases of Edition: basic, premium, and ‘ultimate`. We’ll set the raw value equal to the case name.
  7. Let’s create a mutating method upgrade() that sets its own value one step higher unless it is the highest edition, in which case it should print "Can’t upgrade further to the console." For example, if an instance of Edition is set to the basic case, upgrade() should set the instance to case premium.
  */
-
+enum Edition: String {
+    case basic
+    case premium
+    case ultimate
+    
+    mutating func upgrade() {
+        switch self {
+        case .basic:
+            self = .premium
+        case .premium:
+            self = .ultimate
+        case .ultimate:
+            print("Can't upgrade further to the console")
+        }
+    }
+}
 
 
 
@@ -39,7 +70,19 @@
  9. We’ll create two cases with associated values to represent the different delivery types. Create one case called cloudDigital that has an associated Bool value called isLifetime. Create another case called shipping that has an associated Int value called weight.
  10. We’ll use a computed property to calculate the shipping cost incurred by a software order. Create a computed Int property called shippingCost that is equal to the weight multiplied by 2 in the case that the delivery method is shipping. If the delivery method is cloudDigital, shippingCost should be 0.
  */
-
+enum DeliveryMethod {
+    case cloudDigital(isLifetime: Bool)
+    case shipping(weight: Int)
+    
+    var shippingCost: Int {
+        switch self {
+        case .shipping(let weight):
+            return weight * 2
+        case .cloudDigital:
+            return 0
+        }
+    }
+}
 
 
 
@@ -59,6 +102,14 @@ d.  If the shipping method is cloudDigital we want to then check the associated 
 
  */
 
+
+func sendOrderConfirmation(product: ProductType, edition: Edition, deliver: DeliveryMethod) {
+    print("Thank you for purchasing the \(Edition.RawValue()) edition of \(ProductType.RawValue()) ")
+    
+    if DeliveryMethod.RawValue {
+        
+    }
+}
 
 
 
