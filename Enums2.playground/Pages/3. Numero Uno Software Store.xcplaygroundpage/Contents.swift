@@ -20,23 +20,22 @@
  3. We’re going to want to iterate across this enumeration so let’s make it conform to the right protocol to enable this.
  4. We want a method that prints all available product types. Define a method called displayProductOfferings(). When called it should print "There are {number of products} products": then print all product cases defined in ProductType.
 */
-enum ProductType: String {
+enum ProductType: String, CaseIterable {
     case aceRepository = "Ace Repository"
     case dealForcer = "Deal Forcer"
     case KadencePlanner = "Kadence Planner"
     case mailCannon = "Mail Cannon"
     
     
-    mutating func displayProductOfferings() {
-        print("There are 4 products")
-        print(self = .aceRepository)
-        print(self = .dealForcer)
-        print(self = .KadencePlanner)
-        print(self = .mailCannon)
-    }
+ 
 }
 
-
+func displayProductOfferings() {
+    print("There are 4 products")
+    for i in ProductType.allCases{
+        print(i)
+    }
+}
 
 
 /*:
@@ -105,9 +104,16 @@ d.  If the shipping method is cloudDigital we want to then check the associated 
 
 func sendOrderConfirmation(product: ProductType, edition: Edition, deliver: DeliveryMethod) {
     print("Thank you for purchasing the \(Edition.RawValue()) edition of \(ProductType.RawValue()) ")
-    
-    if DeliveryMethod.RawValue {
-        
+    switch deliver{
+    case .shipping:
+        print("Your order will be shipped to you at a cost of $\(deliver.shippingCost)")
+    case .cloudDigital(let isLifeTime):
+        if isLifeTime == true {
+            print("You hve lifetime cloud access")
+        } else {
+            print("You can access your subscription information on the cloud")
+            
+        }
     }
 }
 
@@ -120,13 +126,17 @@ func sendOrderConfirmation(product: ProductType, edition: Edition, deliver: Deli
 /*:
  e. Now let’s see the store in action! Start by calling the displayProductOfferings() method.
  */
-
+var prod = ProductType.dealForcer
+print(displayProductOfferings())
 
 
 /*:
 g. Create a variable instance of the Edition enumeration. Name the variable myEdition and set it to the basic case. Then call the upgrade method on that instance.
  */
+var ed = Edition.basic
 
+ed.upgrade()
+sendOrderConfirmation(product: .aceRepository, edition: ed, deliver: .shipping(weight: 5))
 
 
 
